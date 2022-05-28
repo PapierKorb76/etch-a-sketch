@@ -1,10 +1,15 @@
 const boxWrapper = document.querySelector('.box-wrapper');
 const boxBtn = document.querySelector('#box-btn');
 const drawBtn = document.querySelector('#draw-button');
+const eraserBtn = document.querySelector('#eraser-button');
+const rgbBtn = document.querySelector('#rgb-button');
+
+let div;
 
 boxBtn.addEventListener("click", addDivs);
 drawBtn.addEventListener("click", draw);
-
+eraserBtn.addEventListener("click", erase);
+rgbBtn.addEventListener("click", drawRGB);
 
 function addDivs() {
     while (boxWrapper.firstChild) {
@@ -36,3 +41,25 @@ function draw() {
         });
     }
 }
+
+function drawRGB() {
+    const boxes = document.getElementsByClassName("boxes");
+    for (const box of boxes) {
+        box.addEventListener('click', () => {
+            function randomColor() {
+                return (`rgb(${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)})`);
+            }
+            box.style.backgroundColor = randomColor();
+        });
+    }
+}
+
+function erase() {
+    const boxes = document.getElementsByClassName("boxes");
+    for (const box of boxes) {
+        box.addEventListener('click', () => {
+            box.style.backgroundColor = '#ffffff';
+        });
+    }
+}
+
