@@ -3,13 +3,17 @@ const boxBtn = document.querySelector('#box-btn');
 const drawBtn = document.querySelector('#draw-button');
 const eraserBtn = document.querySelector('#eraser-button');
 const rgbBtn = document.querySelector('#rgb-button');
-
+const eraseAllBtn = document.querySelector('#erase-all-button');
+const grayBtn = document.querySelector('#gray-button');
+let numberOfClicks = 10;
 let div;
 
 boxBtn.addEventListener("click", addDivs);
 drawBtn.addEventListener("click", draw);
 eraserBtn.addEventListener("click", erase);
 rgbBtn.addEventListener("click", drawRGB);
+eraseAllBtn.addEventListener("click", eraseAllGrid);
+grayBtn.addEventListener("click", grayDraw);
 
 function addDivs() {
     while (boxWrapper.firstChild) {
@@ -59,6 +63,27 @@ function erase() {
     for (const box of boxes) {
         box.addEventListener('click', () => {
             box.style.backgroundColor = '#ffffff';
+        });
+    }
+}
+
+function eraseAllGrid() {
+    const boxes = document.getElementsByClassName("boxes");
+    for (const box of boxes) {
+        box.style.backgroundColor = '#ffffff';
+    }
+}
+
+function grayDraw() {
+    numberOfClicks = 10;
+    const boxes = document.getElementsByClassName("boxes");
+    for (const box of boxes) {
+        box.addEventListener('click', () => {
+            function grayColor() {
+                numberOfClicks--;
+                return (`rgb(${numberOfClicks * 25},${numberOfClicks * 25},${numberOfClicks * 25})`);
+            }
+            box.style.backgroundColor = grayColor();
         });
     }
 }
